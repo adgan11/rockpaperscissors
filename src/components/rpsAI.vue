@@ -1,8 +1,8 @@
 <template>
   <div class="main">
-    <button><img @click="actionSelected(0)" class="chooseButton" :src="rockImgSmall" /></button>
-    <button><img @click="actionSelected(1)" class="chooseButton" :src="paperImgSmall" /></button>
-    <button><img @click="actionSelected(2)" class="chooseButton" :src="scissorsImgSmall" /></button>
+    <button v-if="showButtons"><img @click="actionSelected(0)" id="chooseButton" :src="rockImgSmall" /></button>
+    <button v-if="showButtons"><img @click="actionSelected(1)" id="chooseButton" :src="paperImgSmall" /></button>
+    <button v-if="showButtons"><img @click="actionSelected(2)" id="chooseButton" :src="scissorsImgSmall" /></button>
     <hr>
     <img align="left" :class="leftRockClass" :src= "myCurrentImg" />
     <img align="right" :class="rightRockClass" :src= "enemyCurrentImg" />
@@ -28,7 +28,10 @@ export default {
       enemyCurrentImg: "https://img.icons8.com/stickers/300/000000/hand-skin-type-3.png",
       myHand: "rock",
       enemyHand: "rock",
-      enemyChooseOptions: ["rock", "paper", "scissors"]
+      enemyChooseOptions: ["rock", "paper", "scissors"],
+      playerPoints: 0,
+      enemyPoints: 0,
+      showButtons: true,
     }
   },
   methods: {
@@ -51,7 +54,7 @@ export default {
       console.log(this.myHand);
       this.enemyTurn();
     },
-    enemyTurn() {
+    async enemyTurn() {
       let randomChoice = this.enemyChooseOptions[Math.floor(Math.random() * this.enemyChooseOptions.length)];
       console.log("Enemy Chose: " + randomChoice);
       if (randomChoice === "rock") {
@@ -93,7 +96,17 @@ export default {
           console.log("Tie!");
         }
       }
-    }
+      this.showButtons = false;
+
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+
+      await delay(2000);
+      this.leftRockClass = "rotate90";
+      this.myCurrentImg = this.rockImg;
+      this.rightRockClass = "rotate-90";
+      this.enemyCurrentImg = this.rockImg;
+      this.showButtons = true;
+    },
   }
 }
 </script>
