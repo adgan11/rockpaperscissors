@@ -7,6 +7,9 @@
     <img align="left" :class="leftRockClass" :src= "myCurrentImg" />
     <img align="right" :class="rightRockClass" :src= "enemyCurrentImg" />
 
+    <h1 class="pp">{{ playerPoints }}</h1> <h1 class="ep">{{ enemyPoints }}</h1>
+    
+
   </div>
 
 </template>
@@ -65,9 +68,11 @@ export default {
         }
         else if (this.myHand === "paper") {
           console.log("Player Won!");
+          this.playerPoints += 1;
         }
         else {
           console.log("Enemy Won!");
+          this.enemyPoints += 1;
         }
       }
       else if (randomChoice === "paper") {
@@ -75,12 +80,14 @@ export default {
         this.rightRockClass = "rotate-90";
         if (this.myHand === "rock") {
           console.log("Enemy Won!");
+          this.enemyPoints += 1;
         }
         else if (this.myHand === "paper") {
           console.log("Tie!");
         }
         else {
           console.log("Player Won!");
+          this.playerPoints += 1;
         }
       }
       else {
@@ -88,9 +95,11 @@ export default {
         this.rightRockClass = "flip-only";
         if (this.myHand === "rock") {
           console.log("Player Won!");
+          this.playerPoints += 1;
         }
         else if (this.myHand === "paper") {
           console.log("Enemy Won!");
+          this.enemyPoints += 1;
         }
         else {
           console.log("Tie!");
@@ -150,6 +159,14 @@ export default {
     margin-top: 150px;
     animation: hand-move-left-no-flip 0.3s;
     animation-iteration-count: infinite;
+  }
+  .pp {
+    color: green;
+    float: left;
+  }
+  .ep {
+    color: red;
+    float: right;
   }
   @keyframes hand-move-left {
     0% {
