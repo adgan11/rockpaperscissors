@@ -110,11 +110,21 @@ export default {
       const delay = ms => new Promise(res => setTimeout(res, ms));
 
       await delay(2000);
-      this.leftRockClass = "rotate90";
-      this.myCurrentImg = this.rockImg;
-      this.rightRockClass = "rotate-90";
-      this.enemyCurrentImg = this.rockImg;
-      this.showButtons = true;
+      if (this.playerPoints > 4) {
+        alert("Player Won!");
+        location.reload();
+      }
+      else if (this.enemyPoints > 4) {
+        alert("Enemy Won!");
+        location.reload();
+      }
+      else {
+        this.leftRockClass = "rotate90";
+        this.myCurrentImg = this.rockImg;
+        this.rightRockClass = "rotate-90";
+        this.enemyCurrentImg = this.rockImg;
+        this.showButtons = true;
+      }
     },
   }
 }
