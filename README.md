@@ -1,3 +1,5 @@
+## A ROCK PAPER SCISSORS GAME MADE WITH VUE JS
+
 # rockpaperscissors
 
 ## Project setup
